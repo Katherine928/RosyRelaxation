@@ -1,16 +1,22 @@
 package com.katherine.rosyrelaxationcommon.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Objects;
 
 @Entity
-@Table(name="roles")
+@Table(name = "roles")
+@Getter
+@Setter
 public class Role {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length=40, nullable=false, unique= true)
+    @Column(length = 40, nullable = false, unique = true)
     private String name;
 
     public Role(String name, String description) {
@@ -18,30 +24,25 @@ public class Role {
         this.description = description;
     }
 
-    @Column(length=150, nullable=false)
-    private String description;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
+    public Role(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Role() {}
+
+    @Column(length = 150, nullable = false)
+    private String description;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return Objects.equals(id, role.id);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
