@@ -9,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
-import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -58,9 +58,12 @@ class UserRepositoryTest {
 
     @Test
     void testupdateUserDetails() {
-        User userKatherine = repo.findById(1).get();
-        userKatherine.setEnabled(true);
-        repo.save(userKatherine);
+        Optional<User> userKatherine = repo.findById(1);
+        if(userKatherine.isPresent()) {
+            User user = userKatherine.get();
+            user.setEnabled(true);
+            repo.save(user);
+        }
     }
 
     @Test
@@ -68,7 +71,7 @@ class UserRepositoryTest {
         User userAlex = repo.findById(2).get();
         Role roleEditor = new Role(3);
         Role roleSalesperson = new Role(2);
-        userAlex.getRolses().remove(roleEditor);
+        userAlex.getRoles().remove(roleEditor);
         userAlex.addRole(roleSalesperson);
         repo.save(userAlex);
     }

@@ -35,7 +35,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> rolses = new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
 
     public User(String email, String password, String firstName, String lastName) {
         this.email = email;
@@ -45,7 +45,7 @@ public class User {
     }
 
     public void addRole(Role role) {
-        this.rolses.add(role);
+        this.roles.add(role);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", rolses=" + rolses +
+                ", roles=" + roles +
                 '}';
     }
 }

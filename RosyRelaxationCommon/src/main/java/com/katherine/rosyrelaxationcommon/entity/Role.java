@@ -24,12 +24,6 @@ public class Role {
         this.description = description;
     }
 
-    public Role(Integer id) {
-        this.id = id;
-    }
-
-    public Role() {}
-
     @Column(length = 150, nullable = false)
     private String description;
 
@@ -41,8 +35,19 @@ public class Role {
         return Objects.equals(id, role.id);
     }
 
+    public Role(Integer id) {
+        this.id = id;
+    }
+
+    public Role() {}
+
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
