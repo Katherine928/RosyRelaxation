@@ -9,4 +9,5 @@ public interface UserService {
     List<User> listAll();
     List<Role> listRoles();
     void save(User user);
+    boolean isEmailUnique(String email);
 }

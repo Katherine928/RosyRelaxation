@@ -44,6 +44,12 @@ public class UserServiceImpl implements UserService {
         userRepo.save(user);
     }
 
+    @Override
+    public boolean isEmailUnique(String email) {
+        User userByEmail = userRepo.getUserByEmail(email);
+        return userByEmail == null;
+    }
+
     private void encodePassword(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
