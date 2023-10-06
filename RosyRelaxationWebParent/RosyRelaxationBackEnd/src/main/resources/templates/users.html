@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale = 1.0, minimum-scale=1.0">
     <title>Home - RosyRelaxation Admin</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
@@ -79,13 +81,20 @@
             <tbody>
                 <tr th:each="user : ${listUsers}">
                     <td>[[${user.id}]]</td>
-                    <td></td>
+                    <td><span class="fa-solid fa-image-portrait fa-3x icon-dark"></span></td>
                     <td>[[${user.email}]]</td>
                     <td>[[${user.firstName}]]</td>
                     <td>[[${user.lastName}]]</td>
                     <td>[[${user.roles}]]</td>
-                    <td>[[${user.enabled}]]</td>
-                    <td>Edit &nbsp; Delete</td>
+                    <td>
+                        <a href="" class="fa-solid fa-circle-check fa-2x icon-green" th:if="${user.enabled == true}" style="text-decoration: none"></a>
+                        <a href="" class="fa-solid fa-circle-xmark fa-2x icon-green" th:if="${user.enabled == false}" style="text-decoration: none"></a>
+                    </td>
+                    <td>
+                        <span class="fa-solid fa-pen-to-square icon-green fa-xl" href=""></span>
+                        &nbsp;
+                        <span class="fa-solid fa-trash-can icon-red fa-xl"></span>
+                    </td>
                 </tr>
             </tbody>
         </table>
