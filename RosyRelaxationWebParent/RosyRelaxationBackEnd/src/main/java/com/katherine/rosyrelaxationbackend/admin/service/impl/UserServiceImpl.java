@@ -2,6 +2,7 @@ package com.katherine.rosyrelaxationbackend.admin.service.impl;
 
 import com.katherine.rosyrelaxationbackend.admin.service.UserService;
 import com.katherine.rosyrelaxationbackend.admin.user.RoleRepository;
+import com.katherine.rosyrelaxationbackend.admin.exception.UserNotFoundException;
 import com.katherine.rosyrelaxationbackend.admin.user.UserRepository;
 import com.katherine.rosyrelaxationcommon.entity.Role;
 import com.katherine.rosyrelaxationcommon.entity.User;
@@ -48,6 +49,11 @@ public class UserServiceImpl implements UserService {
     public boolean isEmailUnique(String email) {
         User userByEmail = userRepo.getUserByEmail(email);
         return userByEmail == null;
+    }
+
+    @Override
+    public User get(Integer id) throws UserNotFoundException {
+        return userRepo.findById(id).orElseThrow(() -> new UserNotFoundException("Could not find any user with id " + id));
     }
 
     private void encodePassword(User user) {

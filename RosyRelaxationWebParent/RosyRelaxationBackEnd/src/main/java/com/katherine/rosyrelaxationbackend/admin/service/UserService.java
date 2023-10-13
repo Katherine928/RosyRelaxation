@@ -1,5 +1,7 @@
 package com.katherine.rosyrelaxationbackend.admin.service;
 
+
+import com.katherine.rosyrelaxationbackend.admin.exception.UserNotFoundException;
 import com.katherine.rosyrelaxationcommon.entity.Role;
 import com.katherine.rosyrelaxationcommon.entity.User;
 
@@ -10,4 +12,5 @@ public interface UserService {
     List<Role> listRoles();
     void save(User user);
     boolean isEmailUnique(String email);
+    User get(Integer id) throws UserNotFoundException;
 }

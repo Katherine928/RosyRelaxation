@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" http-equiv="Content-Type" content="text/html">
     <meta name="viewport" content="width=device-width, initial-scale = 1.0, minimum-scale=1.0">
@@ -14,7 +14,7 @@
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg" style="background-color: #FFC8C8">
         <a class="navbar-brand" th:href="@{/}">
-        <img th:src="@{/images/logo.png}" alt="logo picture" style="width: 50px"/>
+            <img th:src="@{/images/logo.png}" alt="logo picture" style="width: 50px"/>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -79,23 +79,26 @@
             </tr>
             </thead>
             <tbody>
-                <tr th:each="user : ${listUsers}">
-                    <td>[[${user.id}]]</td>
-                    <td><span class="fa-solid fa-image-portrait fa-3x icon-dark"></span></td>
-                    <td>[[${user.email}]]</td>
-                    <td>[[${user.firstName}]]</td>
-                    <td>[[${user.lastName}]]</td>
-                    <td>[[${user.roles}]]</td>
-                    <td>
-                        <a href="" class="fa-solid fa-circle-check fa-2x icon-green" th:if="${user.enabled == true}" style="text-decoration: none"></a>
-                        <a href="" class="fa-solid fa-circle-xmark fa-2x icon-green" th:if="${user.enabled == false}" style="text-decoration: none"></a>
-                    </td>
-                    <td>
-                        <span class="fa-solid fa-pen-to-square icon-green fa-xl" href=""></span>
-                        &nbsp;
-                        <span class="fa-solid fa-trash-can icon-red fa-xl"></span>
-                    </td>
-                </tr>
+            <tr th:each="user : ${listUsers}">
+                <td>[[${user.id}]]</td>
+                <td><span class="fa-solid fa-image-portrait fa-3x icon-dark"></span></td>
+                <td>[[${user.email}]]</td>
+                <td>[[${user.firstName}]]</td>
+                <td>[[${user.lastName}]]</td>
+                <td>[[${user.roles}]]</td>
+                <td>
+                    <a href="" class="fa-solid fa-circle-check fa-2x icon-green" th:if="${user.enabled == true}"
+                       style="text-decoration: none"></a>
+                    <a href="" class="fa-solid fa-circle-xmark fa-2x icon-red" th:if="${user.enabled == false}"
+                       style="text-decoration: none"></a>
+                </td>
+                <td>
+                    <a class="fa-solid fa-pen-to-square icon-green fa-xl" th:href="@{'/users/edit/' + ${user.id}}"
+                       title="Edit this user" style="text-decoration: none"></a>
+                    &nbsp;
+                    <a class="fa-solid fa-trash-can icon-red fa-xl" style="text-decoration: none"></a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
