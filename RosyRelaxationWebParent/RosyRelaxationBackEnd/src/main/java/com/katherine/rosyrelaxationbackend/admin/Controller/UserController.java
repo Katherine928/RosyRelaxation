@@ -44,6 +44,7 @@ public class UserController {
     public String saveUser(User user, RedirectAttributes redirectAttributes) {
         service.save(user);
         redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
+        redirectAttributes.addFlashAttribute("messageType", "success");
         return "redirect:/users";
     }
 
@@ -58,6 +59,7 @@ public class UserController {
             return "user_form";
         } catch (UserNotFoundException ex) {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
+            redirectAttributes.addFlashAttribute("messageType", "error");
             return "redirect:/users";
         }
 

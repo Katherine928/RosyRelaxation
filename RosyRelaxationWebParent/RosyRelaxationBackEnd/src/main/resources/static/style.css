@@ -3,3 +3,6 @@
 *.icon-green {color: green}
 *.icon-dark {color: rgb(128, 128, 128)}
 *.icon-red {color: red}
+*.background-color {background-color:#FFF0F5}
+*.success-message {background-color: green; color: white; font-weight: 700}
+*.error-message {background-color:red; color: white; font-weight: 700}
