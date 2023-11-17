@@ -11,6 +11,6 @@ public interface UserService {
     List<User> listAll();
     List<Role> listRoles();
     void save(User user);
-    boolean isEmailUnique(String email);
+    boolean isEmailUnique(Integer id, String email);
     User get(Integer id) throws UserNotFoundException;
 }

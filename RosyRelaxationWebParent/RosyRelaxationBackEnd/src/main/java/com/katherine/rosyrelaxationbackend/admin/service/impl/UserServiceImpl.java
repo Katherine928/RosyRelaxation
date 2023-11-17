@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -41,14 +42,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-        encodePassword(user);
+        boolean isUpdatingUser = (user.getId() != null);
+        if(isUpdatingUser) {
+            Optional<User> optionalExistingUser = userRepo.findById(user.getId());
+            if(optionalExistingUser.isPresent()) {
+                User existingUser = optionalExistingUser.get();
+                if(existingUser.getPassword().isEmpty()) {
+                    user.setPassword(existingUser.getPassword());
+                } else {
+                    encodePassword(user);
+                }
+            }
+        }else {
+            encodePassword(user);
+        }
         userRepo.save(user);
     }
 
     @Override
-    public boolean isEmailUnique(String email) {
+    public boolean isEmailUnique(Integer id, String email) {
         User userByEmail = userRepo.getUserByEmail(email);
-        return userByEmail == null;
+        if(userByEmail == null) return true;
+        boolean isCreatingNew = (id == null);
+        if(isCreatingNew) {
+            if(userByEmail != null) return false;
+        } else {
+            if(userByEmail.getId() != id) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
