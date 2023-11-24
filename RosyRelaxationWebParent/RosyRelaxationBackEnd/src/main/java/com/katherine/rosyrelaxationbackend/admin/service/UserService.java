@@ -13,4 +13,5 @@ public interface UserService {
     void save(User user);
     boolean isEmailUnique(Integer id, String email);
     User get(Integer id) throws UserNotFoundException;
+    void delete(Integer id) throws UserNotFoundException;
 }

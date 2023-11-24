@@ -95,18 +95,49 @@
                 </td>
                 <td>
                     <a class="fa-solid fa-pen-to-square icon-green fa-xl" th:href="@{'/users/edit/' + ${user.id}}"
+                       th:userId="${user.id}"
                        title="Edit this user" style="text-decoration: none"></a>
                     &nbsp;
-                    <a class="fa-solid fa-trash-can icon-red fa-xl" style="text-decoration: none"></a>
+                    <a class="fa-solid fa-trash-can icon-red fa-xl link-delete" style="text-decoration: none"
+                       th:href="@{'/users/delete/' + ${user.id}}"></a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
+    <div class="modal fade text-center" id="confirmModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Confirmation</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <span id="modalBody"></span>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-success" href="" id="yesButton">Yes</a>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="text-center">
         <p>RosyRelaxation Control Panel - Copyright &copy; RosyRelaxation</p>
     </div>
 </div>
-
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".link-delete").on("click", function(e){
+            e.preventDefault();
+            link = $(this);
+            // alert($(this).attr("href"));
+            userId = link.attr("userId");
+            $("#yesButton").attr("href", link.attr("href"));
+            $("#modalBody").text("Are you sure you want to delete this user ID " + userId + "?");
+            $("#confirmModal").modal("show");
+        });
+    })
+</script>
 </body>
 </html>
