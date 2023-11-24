@@ -94,5 +94,18 @@ class UserRepositoryTest {
         Integer id = 1;
         Long countById = repo.countById(id);
         assertThat(countById).isNotNull()
-                .isGreaterThan(0);    }
+                .isGreaterThan(0);
+    }
+
+    @Test
+    void testDisableUser() {
+        Integer id = 1;
+        repo.updateEnabledStatus(id, false);
+    }
+
+    @Test
+    void testEnableUser() {
+        Integer id = 1;
+        repo.updateEnabledStatus(id, true);
+    }
 }

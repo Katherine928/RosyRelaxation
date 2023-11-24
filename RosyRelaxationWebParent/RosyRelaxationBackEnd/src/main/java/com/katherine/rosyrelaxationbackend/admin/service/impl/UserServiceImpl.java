@@ -6,15 +6,18 @@ import com.katherine.rosyrelaxationbackend.admin.exception.UserNotFoundException
 import com.katherine.rosyrelaxationbackend.admin.user.UserRepository;
 import com.katherine.rosyrelaxationcommon.entity.Role;
 import com.katherine.rosyrelaxationcommon.entity.User;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepo;
@@ -86,6 +89,11 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("Could not find any user with ID " + id);
         }
         userRepo.deleteById(id);
+    }
+
+    @Override
+    public void updateUserEnabledStatus(Integer id, boolean enabled) {
+        userRepo.updateEnabledStatus(id, enabled);
     }
 
     private void encodePassword(User user) {
