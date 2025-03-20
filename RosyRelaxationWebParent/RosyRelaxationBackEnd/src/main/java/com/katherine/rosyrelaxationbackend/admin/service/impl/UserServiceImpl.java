@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -68,13 +69,10 @@ public class UserServiceImpl implements UserService {
         if(userByEmail == null) return true;
         boolean isCreatingNew = (id == null);
         if(isCreatingNew) {
-            if(userByEmail != null) return false;
+            return false;
         } else {
-            if(userByEmail.getId() != id) {
-                return false;
-            }
+            return Objects.equals(userByEmail.getId(), id);
         }
-        return true;
     }
 
     @Override
